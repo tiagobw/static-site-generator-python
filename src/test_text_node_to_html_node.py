@@ -54,3 +54,14 @@ class TestTextNodeToHtmlNode(unittest.TestCase):
                 "alt": "This is an image of a dog",
             },
         )
+
+    def test_invalid_text_type(self):
+        node = TextNode(
+            "This is an invalid text type",
+            "Invalid",
+        )
+
+        with self.assertRaises(Exception) as cm:
+            text_node_to_html_node(node)
+
+        self.assertEqual(str(cm.exception), "Invalid text type!")
