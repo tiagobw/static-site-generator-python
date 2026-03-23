@@ -12,7 +12,11 @@ class TestParentNode(unittest.TestCase):
 
     def test_to_html_without_children(self):
         parent_node = ParentNode("div", [])
-        self.assertRaises(ValueError, parent_node.to_html)
+
+        with self.assertRaises(ValueError) as cm:
+            parent_node.to_html()
+
+        self.assertEqual(str(cm.exception), "All parent nodes must have children.")
 
     def test_to_html_with_grandchildren(self):
         grandchild_node = LeafNode("b", "grandchild")
